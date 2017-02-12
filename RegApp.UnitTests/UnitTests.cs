@@ -115,6 +115,9 @@ namespace RegApp.UnitTests
             // assert
             Assert.Throws<Exception>(() => testcourse.AddStudent(teststudent));
             Assert.AreEqual(Global.maxStudents, testcourse.RosterCount);
+
+            // my own tests
+            //Assert.AreEqual(testcourse.GetStudentByFullName("test0 lname"), testcourse.GetStudentRoster()[0]); keep working on this.
         
         } // CoursesFullException method
     }
