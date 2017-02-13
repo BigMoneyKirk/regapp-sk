@@ -15,15 +15,30 @@ namespace RegistrationApp
         // fields
         private static int option = 0;
         private static string prompt = "";
+        public static string addCourse = "";
+        public static string studentFirstName = "";
+        public static string studentLastName = "";
+        public static string searchCourse = "";
+        public static string findStudent = "";
 
         // main
         static void Main(string[] args)
         {
+            DisconnectionHelper.GetDisconnectedResult(DisconnectionHelper.GetConnectionString(), DisconnectionHelper.GetQueryString());
+            
+            // comment out here
             Prompt();
             prompt = Console.ReadLine();
-            option = Int32.Parse(prompt);
-
+            try
+            {
+                option = Int32.Parse(prompt);
+            }
+            catch(Exception noChars)
+            {
+                Console.WriteLine(noChars.Message);
+            }
             SwitchStatements();
+            // end the comment out here
         } // main
 
         private static void Prompt()
@@ -43,27 +58,38 @@ namespace RegistrationApp
             {
                 case 1:
                     Console.WriteLine("Enter the name of the course you want to add: ");
-                    string course = Console.ReadLine();
+                    addCourse = Console.ReadLine();
+
                     Console.ReadLine();
                     break;
 
                 case 2:
                     Console.WriteLine("Enter the first name of the student you want to add: ");
-                    string studentFirstName = Console.ReadLine();
+                    studentFirstName = Console.ReadLine();
 
                     Console.WriteLine("Enter the last name of the student you want to add: ");
-                    string studentLastName = Console.ReadLine();
+                    studentLastName = Console.ReadLine();
 
                     Console.ReadLine();
                     break;
 
                 case 3:
+                    Console.WriteLine("Enter the name of the course you want to find: ");
+                    searchCourse = Console.ReadLine();
+                    Console.ReadLine();
                     break;
 
                 case 4:
+                    Console.WriteLine("Enter the name of the student you want to find: ");
+                    findStudent = Console.ReadLine();
+
+                    Console.ReadLine();
                     break;
 
                 default:
+                    Console.WriteLine("Guess you found what you were looking for. Goodbye! :)");
+                    Thread.Sleep(5000);
+                    System.Environment.Exit(1);
                     break;
             } // switch
         } // SwitchStatement

@@ -20,10 +20,10 @@ namespace RegistrationApp
         {
             using (SqlConnection sqlcon = new SqlConnection(connection))
             {
-                // BEGIN HERE AGAIN!!
                 DataSet ds = new DataSet();
-                SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = new SqlCommand(query, sqlcon);
+                adapter.Fill(ds);
 
                 return ds;
             }
@@ -31,7 +31,7 @@ namespace RegistrationApp
 
         public static string GetConnectionString()
         {
-            return "Data Source=myinstancedemo.chppvnuzl4vk.us-east-1.rds.amazonaws.com,1433; Initial Catalog=RegistrationAppDB;Persist Security Info=True;User ID=stephenkirkland;Password=12345678;Encyrpt=False";
+            return "Data Source=myinstancedemo.chppvnuzl4vk.us-east-1.rds.amazonaws.com,1433;Initial Catalog=RegistrationAppDB;Persist Security Info=True;User ID=stephenkirkland;Password=12345678;Encrypt=False;";
         }
 
         public static string GetQueryString()
