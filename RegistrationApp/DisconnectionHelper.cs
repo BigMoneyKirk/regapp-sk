@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University.Users;
 
 namespace RegistrationApp
 {
@@ -23,8 +24,8 @@ namespace RegistrationApp
                 DataSet ds = new DataSet();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand(query, sqlcon);
-                adapter.Fill(ds);
-
+                adapter = AddStudent(sqlcon, Program.studentFirstName, Program.studentLastName, Program.studentEmail, Program.studentPassword, Program.studentMajorKey, Program.studentStatus, Program.studentFulltime);
+                //adapter.Fill(ds);
                 return ds;
             }
         }
@@ -36,7 +37,17 @@ namespace RegistrationApp
 
         public static string GetQueryString()
         {
-            return "SELECT * FROM [User].Student;";
+            return "SELECT * FROM Student;";
+        }
+
+        public static SqlDataAdapter AddStudent(SqlConnection connection, string fname, string lname, string email, string password, int MajorKey, string status, int isFulltime)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            SqlCommand command = new SqlCommand(
+                $"INSERT INTO Student VALUES({fname}, {lname}, {email}, {password}, {MajorKey}, {status}, {isFulltime})");
+
+            adapter.SelectCommand = command;
+            return adapter;
         }
     }
 }

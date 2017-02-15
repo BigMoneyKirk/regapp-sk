@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using University.Users;
 using University.Courses;
 using University;
+using System.Data;
 
 namespace RegistrationApp
 {
@@ -18,14 +19,19 @@ namespace RegistrationApp
         public static string addCourse = "";
         public static string studentFirstName = "";
         public static string studentLastName = "";
+        public static string studentEmail = "";
+        public static string studentPassword = "";
+        public static int studentMajorKey = 0;
+        public static string studentStatus = "";
+        public static int studentFulltime = 0;
         public static string searchCourse = "";
         public static string findStudent = "";
+
+        public static int i = 2; // I set it as 2...it will start off as 1 when I refresh the chart...will get int from PRIMARY KEY
 
         // main
         static void Main(string[] args)
         {
-            DisconnectionHelper.GetDisconnectedResult(DisconnectionHelper.GetConnectionString(), DisconnectionHelper.GetQueryString());
-            
             // comment out here
             Prompt();
             prompt = Console.ReadLine();
@@ -70,6 +76,42 @@ namespace RegistrationApp
                     Console.WriteLine("Enter the last name of the student you want to add: ");
                     studentLastName = Console.ReadLine();
 
+                    Console.WriteLine("Enter student's new password: ");
+                    studentPassword = Console.ReadLine();
+
+                    Console.WriteLine("Enter student's e-mail: ");
+                    studentEmail = Console.ReadLine();
+
+                    Console.WriteLine("What is your major: ");
+                    Console.WriteLine("1. Computer Systems Engineering");
+                    string studentMajorKeyString = Console.ReadLine();
+                    try
+                    {
+                        studentMajorKey = Int32.Parse(studentMajorKeyString);
+                    }
+                    catch (Exception noChars)
+                    {
+                        Console.WriteLine(noChars.Message);
+                    }
+
+                    Console.WriteLine("What is your current status: ");
+                    studentStatus = Console.ReadLine();
+
+                    Console.WriteLine("Are you full time?");
+                    string studentFulltimeString = Console.ReadLine();
+                    try
+                    {
+                        studentFulltime = Int32.Parse(studentFulltimeString);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    Console.WriteLine($"This student's id is: {i}");
+
+                    DisconnectionHelper.GetDisconnectedResult(DisconnectionHelper.GetConnectionString(), DisconnectionHelper.GetQueryString());
+
                     Console.ReadLine();
                     break;
 
@@ -93,5 +135,11 @@ namespace RegistrationApp
                     break;
             } // switch
         } // SwitchStatement
-    }
-}
+
+        public static void AddStudent()
+        {
+
+        }
+
+    } // class
+} // namespace
